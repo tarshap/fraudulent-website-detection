@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Fraudulent Website Detection System | AI Security</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <div class="background-grid"></div>
+
+    <header class="app-header">
+        <div class="badge-tag">HACKATHON SECURE ML</div>
+        <h1>FRAUDULENT WEBSITE DETECTION SYSTEM</h1>
+        <p class="subtitle">AI-powered website security and phishing detection using <strong>XGBoost</strong></p>
+    </header>
+
+    <main class="container">
+        <!-- Input Card -->
+        <section class="card input-card">
+            <label for="urlInput" class="input-label">Enter Website URL to Analyze</label>
+            <div class="input-group">
+                <span class="url-icon">🌐</span>
+                <input type="text" id="urlInput" placeholder="https://example.com/login" autocomplete="off" spellcheck="false">
+                <button id="analyzeBtn" class="btn btn-primary">
+                    <span class="btn-text">ANALYZE WEBSITE</span>
+                    <span class="spinner" id="loadingSpinner"></span>
+                </button>
+            </div>
+
+            <!-- Quick Demo Examples -->
+            <div class="quick-examples">
+                <span class="example-label">Quick Test Samples:</span>
+                <button type="button" class="btn-chip chip-safe" data-url="https://www.google.com">Safe: Google</button>
+                <button type="button" class="btn-chip chip-safe" data-url="https://www.github.com">Safe: GitHub</button>
+                <button type="button" class="btn-chip chip-danger" data-url="http://192.168.1.1/update-account/bank-verify-secure">Phishing: Raw IP & Keywords</button>
+                <button type="button" class="btn-chip chip-danger" data-url="http://secure-paypal-login.account-verification-alert.com/signin">Phishing: Subdomains & HTTP</button>
+            </div>
+
+            <div id="errorMessage" class="error-banner hidden"></div>
+        </section>
+
+        <!-- Result Card -->
+        <section id="resultCard" class="card result-card hidden">
+            <div class="result-header">
+                <div class="result-title-row">
+                    <h2 class="result-section-title">ANALYSIS RESULT</h2>
+                    <span class="model-badge">MODEL: XGBOOST CLASSIFIER</span>
+                </div>
+                <div id="statusBadge" class="status-badge">POTENTIAL PHISHING</div>
+            </div>
+
+            <div class="result-body">
+                <!-- Gauge / Score Box -->
+                <div class="score-card">
+                    <div class="score-label">MODEL RISK ESTIMATION</div>
+                    <div class="score-display">
+                        <span id="riskScoreValue" class="score-number">0</span><span class="score-percent">%</span>
+                    </div>
+                    <div class="progress-bar-container">
+                        <div id="riskProgressBar" class="progress-bar" style="width: 0%;"></div>
+                    </div>
+                    <div id="riskLevelText" class="risk-level-tag">Low Risk</div>
+                </div>
+
+                <!-- Characteristics Breakdown -->
+                <div class="characteristics-box">
+                    <h3 class="box-title">URL Characteristics</h3>
+                    <div class="characteristics-table">
+                        <div class="char-row">
+                            <span class="char-name">URL Length</span>
+                            <span id="charUrlLength" class="char-val">Normal</span>
+                        </div>
+                        <div class="char-row">
+                            <span class="char-name">Special Characters</span>
+                            <span id="charSpecialChars" class="char-val">Normal</span>
+                        </div>
+                        <div class="char-row">
+                            <span class="char-name">Subdomains</span>
+                            <span id="charSubdomains" class="char-val">Normal</span>
+                        </div>
+                        <div class="char-row">
+                            <span class="char-name">IP Address</span>
+                            <span id="charIp" class="char-val">Not detected</span>
+                        </div>
+                        <div class="char-row">
+                            <span class="char-name">HTTPS</span>
+                            <span id="charHttps" class="char-val">Detected</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Explainability / Why Flagged -->
+            <div class="explanation-section">
+                <h3 class="box-title">Decision Explainability & Indicators</h3>
+                <div id="reasonsList" class="reasons-list">
+                    <!-- Dynamic reasons populated by script.js -->
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer class="app-footer">
+        <p>Fraudulent Website Detection System | Powered by XGBoost & NVIDIA CUDA | UCI PhiUSIIL Dataset</p>
+    </footer>
+
+    <script src="{{ url_for('static', filename='script.js') }}"></script>
+</body>
+</html>

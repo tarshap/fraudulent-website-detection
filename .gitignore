@@ -1,0 +1,24 @@
+# Byte-compiled / optimized / DLL files
+__pycache__/
+*.py[cod]
+*$py.class
+
+# Virtual Environments
+venv/
+env/
+ENV/
+
+# Large raw datasets (downloadable via python src/download_dataset.py)
+data/raw/*.csv
+
+# Distribution / packaging
+build/
+dist/
+*.egg-info/
+
+# Local IDE & OS files
+.vscode/
+.idea/
+.DS_Store
+Thumbs.db
+*.log
